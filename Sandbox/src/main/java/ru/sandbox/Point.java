@@ -1,19 +1,19 @@
 package ru.sandbox;
 
 /**
- * Created by Dborisov on 12.04.2016.
+ * Created by Naum.Ginzburg on 01.05.2017.
  */
 public class Point {
 
-  public double x;
-  public double y;
+    public double x;
+    public double y;
 
-  public Point(double x, double y) {
-    this.x = x;
-    this.y = y;
-  }
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
 
-  public double distance(Point p) {
-    return Math.sqrt(Math.pow((p.x - this.x), 2) + Math.pow((p.y - this.y), 2));
-  }
+    public double distance(Point p) {
+        return Math.sqrt(Math.pow((p.x - this.x), 2) + Math.pow((p.y - this.y), 2));
+    }
 }

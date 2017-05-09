@@ -1,18 +1,18 @@
 package ru.sandbox;
 
 /**
- * Created by Dborisov on 12.04.2016.
+ * Created by Naum.Ginzburg on 01.05.2017.
  */
 public class Square {
 
-  public double l;
+    public double l;
 
-  public Square(double len) {
-    this.l = len;
-  }
+    public Square(double len) {
+        this.l = len;
+    }
 
-  public double area() {
-    return this.l * this.l;
-  }
+    public double area() {
+        return this.l * this.l;
+    }
 
 }
