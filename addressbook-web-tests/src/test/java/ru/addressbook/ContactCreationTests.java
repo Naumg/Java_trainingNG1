@@ -1,8 +1,8 @@
 package ru.addressbook;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class ContactCreationTests {
     InternetExplorerDriver wd;
     
-    @Before
+    @BeforeMethod
     public void setUp() throws Exception {
         wd = new InternetExplorerDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
@@ -66,7 +66,7 @@ public class ContactCreationTests {
     }
 
 
-    @After
+    @AfterMethod
     public void tearDown() {
         wd.quit();
     }
