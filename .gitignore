@@ -7,4 +7,6 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-.idea/workspace.xml
+/.idea/workspace.xml
+# /Sandbox/
+#/Sandbox/src/test/java/ru/sandbox/SquareTests.java
