@@ -1,4 +1,4 @@
-package ru.addressbook;
+package ru.addressbook.tests;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -6,10 +6,11 @@ import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import ru.addressbook.model.ShortContactData;
 
 import java.util.concurrent.TimeUnit;
 
-public class ContactCreationTests {
+public class ContactCreationTests extends TestBase {
     InternetExplorerDriver wd;
     
     @BeforeMethod
