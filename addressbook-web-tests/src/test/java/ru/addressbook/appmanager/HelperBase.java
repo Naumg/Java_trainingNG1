@@ -2,15 +2,15 @@ package ru.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Created by Naum.Ginzburg on 12.05.2017.
  */
 public class HelperBase {
-    protected InternetExplorerDriver wd;
+    protected WebDriver wd;
 
-    public HelperBase(InternetExplorerDriver wd) {
+    public HelperBase(WebDriver wd) {
         this.wd = wd;
     }
 

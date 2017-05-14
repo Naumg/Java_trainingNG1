@@ -1,7 +1,7 @@
 package ru.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.WebDriver;
 import ru.addressbook.model.GroupData;
 
 /**
@@ -9,7 +9,7 @@ import ru.addressbook.model.GroupData;
  */
 public class GroupHelper extends HelperBase {
 
-    public GroupHelper(InternetExplorerDriver wd) {
+    public GroupHelper(WebDriver wd) {
         super(wd);
     }
 

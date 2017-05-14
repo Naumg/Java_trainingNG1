@@ -2,14 +2,14 @@ package ru.addressbook.appmanager;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.WebDriver;
 import ru.addressbook.model.ShortContactData;
 
 /**
  * Created by Naum.Ginzburg on 13.05.2017.
  */
 public class ContactHelper extends HelperBase {
-    public ContactHelper(InternetExplorerDriver wd) {
+    public ContactHelper(WebDriver wd) {
         super(wd);
     }
 

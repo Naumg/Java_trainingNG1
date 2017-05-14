@@ -1,7 +1,7 @@
 package ru.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Created by Naum.Ginzburg on 12.05.2017.
@@ -9,7 +9,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 public class NavigationHelper extends HelperBase {
 //    private InternetExplorerDriver wd;
 
-    public NavigationHelper(InternetExplorerDriver wd) {
+    public NavigationHelper(WebDriver wd) {
         super(wd);
     }
 
