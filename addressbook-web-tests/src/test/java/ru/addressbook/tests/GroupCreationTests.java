@@ -11,5 +11,4 @@ public class GroupCreationTests extends TestBase{
         app.getGroupHelper().createGroup(new GroupData("groupname3", "groupheader3", "groupfooter3"));
     }
 
-
 }

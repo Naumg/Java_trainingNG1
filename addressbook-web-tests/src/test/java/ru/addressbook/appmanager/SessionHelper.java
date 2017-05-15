@@ -1,7 +1,6 @@
 package ru.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 /**
  * Created by Naum.Ginzburg on 12.05.2017.
