@@ -1,7 +1,6 @@
 package ru.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import ru.addressbook.model.GroupData;
 
 /**
@@ -9,8 +8,8 @@ import ru.addressbook.model.GroupData;
  */
 public class GroupHelper extends HelperBase {
 
-    public GroupHelper(WebDriver wd) {
-        super(wd);
+    public GroupHelper(ApplicationManager app) {
+        super(app);
     }
 
     public void returnToGroupPage() {
@@ -45,5 +44,16 @@ public class GroupHelper extends HelperBase {
 
     public void submitGroupModification() {
         click(By.name("update"));
-}
+    }
+
+    public void createGroup(GroupData group) {
+        initGroupCreation();
+        fillGroupForm(group);
+        submitGroupCreation();
+        returnToGroupPage();
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }

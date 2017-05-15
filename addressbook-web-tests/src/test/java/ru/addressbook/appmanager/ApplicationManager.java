@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
 
     WebDriver wd;
+    ApplicationManager app;
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
@@ -35,10 +36,10 @@ public class ApplicationManager {
         }
         wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
-        groupHelper = new GroupHelper(wd);
-        navigationHelper = new NavigationHelper(wd);
-        sessionHelper = new SessionHelper(wd);
-        contactHelper = new ContactHelper(wd);
+        groupHelper = new GroupHelper(ApplicationManager.this);
+        navigationHelper = new NavigationHelper(ApplicationManager.this);
+        sessionHelper = new SessionHelper(ApplicationManager.this);
+        contactHelper = new ContactHelper(ApplicationManager.this);
         sessionHelper.login("admin", "secret");
     }
 

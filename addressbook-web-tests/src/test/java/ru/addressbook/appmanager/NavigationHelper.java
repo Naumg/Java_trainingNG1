@@ -1,16 +1,14 @@
 package ru.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 /**
  * Created by Naum.Ginzburg on 12.05.2017.
  */
 public class NavigationHelper extends HelperBase {
-//    private InternetExplorerDriver wd;
 
-    public NavigationHelper(WebDriver wd) {
-        super(wd);
+    public NavigationHelper(ApplicationManager app) {
+        super(app);
     }
 
     public void gotoGroupPage() {
@@ -23,7 +21,7 @@ public class NavigationHelper extends HelperBase {
 //              Если найден правильный элемент - все работает
 //          &&  wd.findElement(By.xpath("//div[@id='content']//h1[.='Groups']")).getText().equals("Groups")
 //
-                &&  isElementPresent(By.name("new"))) {
+                && isElementPresent(By.name("new"))) {
             return;
         }
         click(By.linkText("groups"));
@@ -39,7 +37,10 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void gotoHomePage() {
+
+        if (isElementPresent(By.id("maintable"))) {
+            return;
+        }
         click(By.linkText("home"));
     }
-
 }
