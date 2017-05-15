@@ -13,7 +13,8 @@ public class ContactModificationTests extends TestBase {
         // Ошибка отсутствия редактируемых записей пока не обрабатывается
         app.getNavigationHelper().gotoHomePage();
         app.getContactHelper().initContactModification();
-        app.getContactHelper().fillContactForm(new ShortContactData("Firstnamemod", "Middlenamemod", "Lastnamemod", "aaamod@billing.ru"));
+        app.getContactHelper().fillContactForm(new ShortContactData("Firstnamemod", "Middlenamemod", "Lastnamemod",
+                "aaamod@billing.ru", null), false);
         app.getContactHelper().updateContactInfo();
         app.getNavigationHelper().gotoHomePage();
     }

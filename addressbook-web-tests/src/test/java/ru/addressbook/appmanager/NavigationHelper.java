@@ -14,10 +14,27 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void gotoGroupPage() {
+//        if (isElementPresent(By.tag))
+        if (isElementPresent(By.xpath("//div[@id='content']//h1[.='Groups']"))
+//
+//            isElementPresent(By.tagName("h1"))
+//              Данное условие не работает: возвращается пустая строка ""
+//          &&  wd.findElements(By.tagName("h1")).getText().equals("Groups")
+//              Если найден правильный элемент - все работает
+//          &&  wd.findElement(By.xpath("//div[@id='content']//h1[.='Groups']")).getText().equals("Groups")
+//
+                &&  isElementPresent(By.name("new"))) {
+            return;
+        }
         click(By.linkText("groups"));
+
     }
 
     public void gotoEditContactPage() {
+        // Ситуация экзотична, но... для единообразия
+        if (isElementPresent(By.xpath("//div[@id='content']//h1[.='Edit / add address book entry']"))) {
+            return;
+        }
         click(By.linkText("add new"));
     }
 

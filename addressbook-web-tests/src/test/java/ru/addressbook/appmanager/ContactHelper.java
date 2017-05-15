@@ -3,6 +3,8 @@ package ru.addressbook.appmanager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.addressbook.model.ShortContactData;
 
 /**
@@ -21,11 +23,16 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void fillContactForm(ShortContactData shortContactData) {
+    public void fillContactForm(ShortContactData shortContactData, boolean creation) {
         type(By.name("firstname"), shortContactData.getFirstname());
         type(By.name("middlename"), shortContactData.getMiddlename());
         type(By.name("lastname"), shortContactData.getLastname());
         type(By.name("email"), shortContactData.getEmail());
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(ShortContactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void selectContact() {
@@ -40,7 +47,7 @@ public class ContactHelper extends HelperBase {
         // Аналогично: пытаемся удалить первую запись
         if (isSelected(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"))) {
             click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
-//            wd.switchTo().alert().accept();
+//          В одну строку wd.switchTo().alert().accept(); не проходит
             Alert alert = wd.switchTo().alert();
             alert.accept();
         }
