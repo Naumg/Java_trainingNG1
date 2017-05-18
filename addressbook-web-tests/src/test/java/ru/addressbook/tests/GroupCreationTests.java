@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.addressbook.model.GroupData;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -31,6 +32,10 @@ public class GroupCreationTests extends TestBase {
         group.setId(max);
         before.add(group);
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
+        Collections.sort(before);
+        Collections.sort(after);
+        Assert.assertEquals(before, after);
     }
 
 }

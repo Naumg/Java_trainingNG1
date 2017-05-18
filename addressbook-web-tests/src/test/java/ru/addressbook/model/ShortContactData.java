@@ -30,6 +30,7 @@ public class ShortContactData {
     public String getEmail() {
         return email;
     }
+
     public static String getGroup() {
         return group;
     }

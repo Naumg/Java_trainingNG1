@@ -1,6 +1,10 @@
 package ru.addressbook.model;
 
-public class GroupData {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class GroupData implements /*Comparator<GroupData>,*/ Comparable<GroupData> {
     private int id;
     private final String name;
     private final String header;
@@ -12,6 +16,7 @@ public class GroupData {
         this.header = header;
         this.footer = footer;
     }
+
     public GroupData(int id, String name, String header, String footer) {
         this.id = id;
         this.name = name;
@@ -54,15 +59,53 @@ public class GroupData {
 
         GroupData groupData = (GroupData) o;
 
-        if (id != groupData.id) return false;
         return name != null ? name.equals(groupData.name) : groupData.name == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return name != null ? name.hashCode() : 0;
+    }
+
+    @Override
+    public int compareTo(GroupData otherGroupData) {
+        return -otherGroupData.getId() + this.getId();
+//        return -(otherGroupData.getName().compareTo(this.getName()));
+
+    }
+
+    /*
+    * Comparator to sort employees list or array in order of name
+    */
+    public static Comparator<GroupData> nameComparator = new Comparator<GroupData>() {
+
+        @Override
+        public int compare(GroupData g1, GroupData g2) {
+            return g1.getName().compareTo(g2.getName());
+        }
+    };
+
+    public static void main(String[] args) {
+        ArrayList<GroupData> GroupDataArrayList = new ArrayList<GroupData>();
+
+        //Добавление элементов
+
+        GroupDataArrayList.add(new GroupData(99, "50Test group", "Group Header", "Group Footer"));
+        GroupDataArrayList.add(new GroupData(90, "60Test group", "Group Header", "Group Footer"));
+        GroupDataArrayList.add(new GroupData(80, "70Test group", "Group Header", "Group Footer"));
+        GroupDataArrayList.add(new GroupData(98, "55Test group", "Group Header", "Group Footer"));
+        GroupDataArrayList.add(new GroupData(60, "90Test group", "Group Header", "Group Footer"));
+
+        //Sort elements
+        Collections.sort(GroupDataArrayList);
+        for (int i = 0; i < GroupDataArrayList.toArray().length; i++) {
+            System.out.println(GroupDataArrayList.get(i).getId() + " " + GroupDataArrayList.get(i).getName());
+        }
+
+        Collections.sort(GroupDataArrayList, nameComparator);
+        for (int i = 0; i < GroupDataArrayList.toArray().length; i++) {
+            System.out.println(GroupDataArrayList.get(i).getId() + " " + GroupDataArrayList.get(i).getName());
+        }
     }
 }
