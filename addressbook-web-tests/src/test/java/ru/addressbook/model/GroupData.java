@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class GroupData implements /*Comparator<GroupData>,*/ Comparable<GroupData> {
+public class GroupData implements Comparable<GroupData> {
     private int id;
     private final String name;
     private final String header;
