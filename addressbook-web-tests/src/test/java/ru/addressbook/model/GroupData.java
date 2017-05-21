@@ -104,8 +104,8 @@ public class GroupData implements Comparable<GroupData> {
         }
 
         Collections.sort(GroupDataArrayList, nameComparator);
-        for (int i = 0; i < GroupDataArrayList.toArray().length; i++) {
-            System.out.println(GroupDataArrayList.get(i).getId() + " " + GroupDataArrayList.get(i).getName());
-        }
+//        for (int i = 0; i < GroupDataArrayList.toArray().length; i++) {
+//            System.out.println(GroupDataArrayList.get(i).getId() + " " + GroupDataArrayList.get(i).getName());
+//        }
     }
 }

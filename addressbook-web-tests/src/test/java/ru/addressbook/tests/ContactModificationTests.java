@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ContactModificationTests extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testContactModification() {
         app.getNavigationHelper().gotoHomePage();
         if (!app.getContactHelper().isThereAContact()) {
@@ -21,7 +21,7 @@ public class ContactModificationTests extends TestBase {
         }
         List<ShortContactData> before = app.getContactHelper().getShortContactList();
         app.getContactHelper().initContactModification(before.size() - 1);
-        ShortContactData contact = new ShortContactData(before.get(before.size() - 1).getId(), "Firstname", null/*"Middlename"*/, "Lastname",
+        ShortContactData contact = new ShortContactData(before.get(before.size() - 1).getId(), "Firstname4", null/*"Middlename"*/, "Lastname4",
                 "aaa@billing.ru", null);
         app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().updateContactInfo();
@@ -31,9 +31,7 @@ public class ContactModificationTests extends TestBase {
         before.remove(before.size() - 1);
         before.add(contact);
         Collections.sort(before, ShortContactData.nameComparator);
-        System.out.println("before= "+before.toString());
         Collections.sort(after, ShortContactData.nameComparator);
-        System.out.println("after = "+after.toString());
         Assert.assertEquals(before, after);
     }
 }

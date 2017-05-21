@@ -83,7 +83,7 @@ public class ShortContactData implements Comparable<ShortContactData> {
 
     @Override
     public int compareTo(ShortContactData otherShortContactData) {
-        System.out.println("this.getId()= " + this.getId() + " otherShortContactData.getId()= " + otherShortContactData.getId());
+//        System.out.println("this.getId()= " + this.getId() + " otherShortContactData.getId()= " + otherShortContactData.getId());
         return -otherShortContactData.getId() + this.getId();
 //        return -(otherGroupData.getName().compareTo(this.getName()));
 
@@ -94,7 +94,6 @@ public class ShortContactData implements Comparable<ShortContactData> {
     */
     public static Comparator<ShortContactData> nameComparator = new Comparator<ShortContactData>() {
         public int compare(ShortContactData g1, ShortContactData g2) {
-            System.out.println("g1.getId()= " + g1.getId() + " g2.getId()= " + g2.getId());
             return g1.getId() - g2.getId();
         }
     };

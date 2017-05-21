@@ -11,11 +11,11 @@ import java.util.List;
  */
 public class ContactDeletionTests extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testContactDeletion() {
         app.getNavigationHelper().gotoHomePage();
         if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ShortContactData("Firstname", "Middlename", "Lastname",
+            app.getContactHelper().createContact(new ShortContactData("Firstname", null/*"Middlename"*/, "Lastname",
                     "aaa@billing.ru", "groupname2"));
         }
         List<ShortContactData> before = app.getContactHelper().getShortContactList();
