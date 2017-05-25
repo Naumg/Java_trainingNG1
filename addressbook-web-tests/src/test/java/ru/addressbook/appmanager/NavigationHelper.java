@@ -37,10 +37,10 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void gotoHomePage() {
-
-        if (isElementPresent(By.id("maintable"))) {
-            return;
-        }
+//        System.out.println("Nav helper 40" + isElementPresent(By.id("maintable")));
+//        if (isElementPresent(By.id("maintable"))) {
+//            return;
+//        }
         click(By.linkText("home"));
     }
 }
