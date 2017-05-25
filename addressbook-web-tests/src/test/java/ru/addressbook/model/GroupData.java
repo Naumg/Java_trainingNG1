@@ -5,31 +5,33 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class GroupData implements Comparable<GroupData> {
-    private int id;
-    private final String name;
-    private final String header;
-    private final String footer;
+    private int id = Integer.MAX_VALUE;
+    private String name;
+    private String header;
+    private String footer;
 
-    public GroupData(String name, String header, String footer) {
-        this.id = 0;
-        this.name = name;
-        this.header = header;
-        this.footer = footer;
+    public GroupData withId(int id) {
+        this.id = id;
+        return this;
     }
 
-    public GroupData(int id, String name, String header, String footer) {
-        this.id = id;
-        this.name = name;
-        this.header = header;
+    public GroupData withFooter(String footer) {
         this.footer = footer;
+        return this;
+    }
+
+    public GroupData withHeader(String header) {
+        this.header = header;
+        return this;
+    }
+
+    public GroupData withName(String name) {
+        this.name = name;
+        return this;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -91,11 +93,11 @@ public class GroupData implements Comparable<GroupData> {
 
         //Добавление элементов
 
-        GroupDataArrayList.add(new GroupData(99, "50Test group", "Group Header", "Group Footer"));
-        GroupDataArrayList.add(new GroupData(90, "60Test group", "Group Header", "Group Footer"));
-        GroupDataArrayList.add(new GroupData(80, "70Test group", "Group Header", "Group Footer"));
-        GroupDataArrayList.add(new GroupData(98, "55Test group", "Group Header", "Group Footer"));
-        GroupDataArrayList.add(new GroupData(60, "90Test group", "Group Header", "Group Footer"));
+        GroupDataArrayList.add(new GroupData().withId(99).withName("50Test group").withHeader("Group Header").withFooter("Group Footer"));
+        GroupDataArrayList.add(new GroupData().withId(90).withName("60Test group").withHeader("Group Header").withFooter("Group Footer"));
+        GroupDataArrayList.add(new GroupData().withId(80).withName("70Test group").withHeader("Group Header").withFooter("Group Footer"));
+        GroupDataArrayList.add(new GroupData().withId(98).withName("55Test group").withHeader("Group Header").withFooter("Group Footer"));
+        GroupDataArrayList.add(new GroupData().withId(60).withName("90Test group").withHeader("Group Header").withFooter("Group Footer"));
 
         //Sort elements
         Collections.sort(GroupDataArrayList);
@@ -104,8 +106,5 @@ public class GroupData implements Comparable<GroupData> {
         }
 
         Collections.sort(GroupDataArrayList, nameComparator);
-//        for (int i = 0; i < GroupDataArrayList.toArray().length; i++) {
-//            System.out.println(GroupDataArrayList.get(i).getId() + " " + GroupDataArrayList.get(i).getName());
-//        }
     }
 }
