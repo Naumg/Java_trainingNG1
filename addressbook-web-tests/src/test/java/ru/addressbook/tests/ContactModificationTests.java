@@ -14,19 +14,19 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testContactModification() {
-        app.getNavigationHelper().gotoHomePage();
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ShortContactData("Firstname", null/*"Middlename"*/, "Lastname",
+        app.goTo().gotoHomePage();
+        if (!app.contact().isThereAContact()) {
+            app.contact().createContact(new ShortContactData("Firstname", null/*"Middlename"*/, "Lastname",
                     "aaa@billing.ru", null));
         }
-        List<ShortContactData> before = app.getContactHelper().getShortContactList();
-        app.getContactHelper().initContactModification(before.size() - 1);
+        List<ShortContactData> before = app.contact().getShortContactList();
+        app.contact().initContactModification(before.size() - 1);
         ShortContactData contact = new ShortContactData(before.get(before.size() - 1).getId(), "Firstname4", null/*"Middlename"*/, "Lastname4",
                 "aaa@billing.ru", null);
-        app.getContactHelper().fillContactForm(contact, false);
-        app.getContactHelper().updateContactInfo();
-        app.getNavigationHelper().gotoHomePage();
-        List<ShortContactData> after = app.getContactHelper().getShortContactList();
+        app.contact().fillContactForm(contact, false);
+        app.contact().updateContactInfo();
+        app.goTo().gotoHomePage();
+        List<ShortContactData> after = app.contact().getShortContactList();
         Assert.assertEquals(after.size(), before.size());
         before.remove(before.size() - 1);
         before.add(contact);

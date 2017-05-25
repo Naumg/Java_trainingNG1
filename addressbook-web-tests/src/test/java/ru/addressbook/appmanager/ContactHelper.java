@@ -59,17 +59,17 @@ public class ContactHelper extends HelperBase {
 
 
     public void createContact(ShortContactData shortContact) {
-        app.getNavigationHelper().gotoEditContactPage();
+        app.goTo().gotoEditContactPage();
         fillContactForm(shortContact, true);
         submitContactInfo();
-        app.getNavigationHelper().gotoHomePage();
+        app.goTo().gotoHomePage();
     }
 
     public boolean isThereAContact() {
         return isElementPresent(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
     }
 
-// Check
+    // Check
     public List<ShortContactData> getShortContactList() {
         List<ShortContactData> contacts = new ArrayList<ShortContactData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("input[name='selected[]']"));
