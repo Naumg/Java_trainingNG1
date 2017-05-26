@@ -3,21 +3,24 @@ package ru.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.addressbook.model.GroupData;
+import ru.addressbook.model.Groups;
 
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
 
     @Test
     public void testGroupCreation() {
         app.goTo().groupPage();
-        List<GroupData> before = app.group().list();
+        Groups before = app.group().all();
         GroupData group = new GroupData().withName("Test group");
         app.group().create(group);
-        List<GroupData> after = app.group().list();
-        Assert.assertEquals(after.size(), before.size() + 1);
+
+        Groups after = app.group().all();
+        assertThat(after.size(), equalTo(before.size() + 1));
 
 //   In Java 7 lambda function absents
 //        group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
@@ -29,13 +32,15 @@ public class GroupCreationTests extends TestBase {
                 max = g.getId();
             }
         }
-//        group.setId(max);
+        group.withId(max);
+        System.out.println("Collections.max(before)= " + Collections.max(before));
         before.add(group);
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
-
-        Collections.sort(before);
-        Collections.sort(after);
         Assert.assertEquals(before, after);
+//        group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
+//        assertThat(after, equalTo(
+//                before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+
+
     }
 
 }
