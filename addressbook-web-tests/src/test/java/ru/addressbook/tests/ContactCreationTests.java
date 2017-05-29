@@ -1,38 +1,28 @@
 package ru.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.addressbook.model.Contacts;
 import ru.addressbook.model.ShortContactData;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreation() {
-        app.goTo().gotoHomePage();
-        List<ShortContactData> before = app.contact().getShortContactList();
-        ShortContactData contact = new ShortContactData("Firstname", null/*"Middlename"*/, "Lastname",
-                "aaa@billing.ru", null);
-        app.contact().createContact(contact);
-        List<ShortContactData> after = app.contact().getShortContactList();
-        Assert.assertEquals(after.size(), before.size() + 1);
-
+        app.goTo().homePage();
+        Contacts before = app.contact().all();
+        ShortContactData contact = new ShortContactData().withFirstname("Firstname1").withLastname("Lastname1").withEmail("aaa@billing.ru");
+        app.contact().create(contact);
+        Contacts after = app.contact().all();
+        assertThat(after.size(), equalTo(before.size() + 1));
         int max = 0;
         for (ShortContactData g : after) {
             if (g.getId() > max) {
                 max = g.getId();
             }
         }
-
-        contact.setId(max);
-        before.add(contact);
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
-
-        Collections.sort(before);
-        Collections.sort(after);
-        Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.withAdded(contact.withId(max))));
     }
 }

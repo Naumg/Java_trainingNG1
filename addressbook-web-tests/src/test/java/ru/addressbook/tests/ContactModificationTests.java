@@ -1,38 +1,37 @@
 package ru.addressbook.tests;
 
-import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.addressbook.model.Contacts;
 import ru.addressbook.model.ShortContactData;
 
-import java.util.Collections;
-import java.util.List;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Naum.Ginzburg on 13.05.2017.
  */
 public class ContactModificationTests extends TestBase {
+    @BeforeMethod
+    public void ensurePreconditions() {
+        app.goTo().homePage();
+        if (app.contact().all().size() == 0) {
+            app.contact().create(new ShortContactData().withFirstname("Alexei").withEmail("barancev@gmail.com"));
+        }
+    }
 
     @Test
     public void testContactModification() {
-        app.goTo().gotoHomePage();
-        if (!app.contact().isThereAContact()) {
-            app.contact().createContact(new ShortContactData("Firstname", null/*"Middlename"*/, "Lastname",
-                    "aaa@billing.ru", null));
-        }
-        List<ShortContactData> before = app.contact().getShortContactList();
-        app.contact().initContactModification(before.size() - 1);
-        ShortContactData contact = new ShortContactData(before.get(before.size() - 1).getId(), "Firstname4", null/*"Middlename"*/, "Lastname4",
-                "aaa@billing.ru", null);
-        app.contact().fillContactForm(contact, false);
-        app.contact().updateContactInfo();
-        app.goTo().gotoHomePage();
-        List<ShortContactData> after = app.contact().getShortContactList();
-        Assert.assertEquals(after.size(), before.size());
-        before.remove(before.size() - 1);
-        before.add(contact);
-        Collections.sort(before, ShortContactData.nameComparator);
-        Collections.sort(after, ShortContactData.nameComparator);
-        Assert.assertEquals(before, after);
+        Contacts before = app.contact().all();
+        ShortContactData modifiedContact = before.iterator().next();
+        ShortContactData contact = new ShortContactData()
+                .withId(modifiedContact.getId()).withFirstname("Alexei_1").withLastname("Barancev_1").withEmail("barancev_1@gmail.com");
+        app.contact().modify(contact);
+        Contacts after = app.contact().all();
+        assertEquals(after.size(), before.size());
+        assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
     }
+
 }
 

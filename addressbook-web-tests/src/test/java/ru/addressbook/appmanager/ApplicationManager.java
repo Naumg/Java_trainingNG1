@@ -34,7 +34,7 @@ public class ApplicationManager {
         } else if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
         }
-        wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(ApplicationManager.this);
         navigationHelper = new NavigationHelper(ApplicationManager.this);

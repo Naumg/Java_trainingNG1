@@ -5,9 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import ru.addressbook.model.Contacts;
 import ru.addressbook.model.ShortContactData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,8 +36,8 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
     public void deleteContact() {
@@ -47,10 +47,8 @@ public class ContactHelper extends HelperBase {
         alert.accept();
     }
 
-
-    public void initContactModification(int index) {
-        List<WebElement> elements = wd.findElements(By.cssSelector("img[title='Edit']"));
-        elements.get(index).click();
+    public void initContactModification(int id) {
+        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
     }
 
     public void updateContactInfo() {
@@ -58,20 +56,31 @@ public class ContactHelper extends HelperBase {
     }
 
 
-    public void createContact(ShortContactData shortContact) {
+    public void create(ShortContactData shortContact) {
         app.goTo().gotoEditContactPage();
         fillContactForm(shortContact, true);
         submitContactInfo();
-        app.goTo().gotoHomePage();
+        app.goTo().homePage();
     }
 
-    public boolean isThereAContact() {
-        return isElementPresent(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
+    public void modify(ShortContactData contact) {
+        app.contact().initContactModification(contact.getId());
+        app.contact().fillContactForm(contact, false);
+        app.contact().updateContactInfo();
+        app.goTo().homePage();
+    }
+
+    public void delete(ShortContactData contact) {
+        selectContactById(contact.getId());
+        click(By.cssSelector("input[value='Delete']"));
+        Alert alert = wd.switchTo().alert();
+        alert.accept();
+        app.goTo().homePage();
     }
 
     // Check
-    public List<ShortContactData> getShortContactList() {
-        List<ShortContactData> contacts = new ArrayList<ShortContactData>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("input[name='selected[]']"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.getAttribute("value"));
@@ -81,9 +90,11 @@ public class ContactHelper extends HelperBase {
             String lastname = title.substring(title.indexOf(' ') + 1, title.length() - 1);
             String email = element.getAttribute("accept");
 
-            ShortContactData contact = new ShortContactData(id, firstname, null/*middlename*/, lastname, email, null);
+            ShortContactData contact = new ShortContactData().withId(id).withFirstname(firstname).withLastname(lastname).withEmail(email);
             contacts.add(contact);
         }
         return contacts;
     }
+
+
 }

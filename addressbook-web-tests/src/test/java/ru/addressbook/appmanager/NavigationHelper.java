@@ -36,7 +36,7 @@ public class NavigationHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void gotoHomePage() {
+    public void homePage() {
 //        System.out.println("Nav helper 40" + isElementPresent(By.id("maintable")));
 //        if (isElementPresent(By.id("maintable"))) {
 //            return;
