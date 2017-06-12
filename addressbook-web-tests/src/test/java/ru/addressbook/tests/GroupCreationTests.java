@@ -10,6 +10,9 @@ import java.util.Collections;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+/**
+ * Created by Naum.Ginzburg on 12.05.2017.
+ */
 public class GroupCreationTests extends TestBase {
 
     @Test
@@ -42,5 +45,17 @@ public class GroupCreationTests extends TestBase {
 
 
     }
+
+    @Test
+    public void testBadGroupCreation() {
+        app.goTo().groupPage();
+        Groups before = app.group().all();
+        GroupData group = new GroupData().withName("Test group'");
+        app.group().create(group);
+        assertThat(app.group().count(), equalTo(before.size()));
+        Groups after = app.group().all();
+        assertThat(after, equalTo(before));
+    }
+
 
 }
