@@ -53,8 +53,12 @@ public class ContactHelper extends HelperBase {
         alert.accept();
     }
 
-    public void initContactModification(int id) {
+    public void initContactModificationById(int id) {
         wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
+    }
+
+    public void openDetailsFormById(int id) {
+        wd.findElement(By.cssSelector("a[href='view.php?id=" + id + "']")).click();
     }
 
     public void updateContactInfo() {
@@ -71,7 +75,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void modify(ContactData contact) {
-        app.contact().initContactModification(contact.getId());
+        app.contact().initContactModificationById(contact.getId());
         app.contact().fillContactForm(contact, false);
         app.contact().updateContactInfo();
         contactCache = null;
@@ -83,6 +87,7 @@ public class ContactHelper extends HelperBase {
         click(By.cssSelector("input[value='Delete']"));
         Alert alert = wd.switchTo().alert();
         alert.accept();
+        contactCache = null;
         app.goTo().homePage();
     }
 
@@ -103,22 +108,50 @@ public class ContactHelper extends HelperBase {
 //        }
 //        return contacts;
 //    }
+
     public ContactData infoFromEditForm(ContactData contact) {
-        app.contact().initContactModification(contact.getId());
+        app.contact().initContactModificationById(contact.getId());
         String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String middlename = wd.findElement(By.name("middlename")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String nickname = wd.findElement(By.name("nickname")).getAttribute("value");
+        String title = wd.findElement(By.name("title")).getAttribute("value");
+        String company = wd.findElement(By.name("company")).getAttribute("value");
         String address = wd.findElement(By.name("address")).getAttribute("value");
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String work = wd.findElement(By.name("work")).getAttribute("value");
+        String fax = wd.findElement(By.name("fax")).getAttribute("value");
         String email = wd.findElement(By.name("email")).getAttribute("value");
         String email2 = wd.findElement(By.name("email2")).getAttribute("value");
         String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+        String homepage = wd.findElement(By.name("homepage")).getAttribute("value");
+        String bday = wd.findElement(By.name("bday")).getAttribute("value");
+        String bmonth = wd.findElement(By.name("bmonth")).getAttribute("value");
+        String byear = wd.findElement(By.name("byear")).getAttribute("value");
+        String aday = wd.findElement(By.name("aday")).getAttribute("value");
+        String amonth = wd.findElement(By.name("amonth")).getAttribute("value");
+        String ayear = wd.findElement(By.name("ayear")).getAttribute("value");
+        String address2 = wd.findElement(By.name("address2")).getAttribute("value");
+        String phone2 = wd.findElement(By.name("phone2")).getAttribute("value");
+        String notes = wd.findElement(By.name("notes")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
                 .withAddress(address)
                 .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
                 .withEmail(email).withEmail2(email2).withEmail3(email3);
+    }
+
+    public String infoFromDetailsFormAsString(ContactData contact) {
+        app.contact().openDetailsFormById(contact.getId());
+        String text = wd.findElement(By.cssSelector("div[id='content']")).getText();
+        // Убираем лишнее \n от фото, поскольку в EditForm данная информация отсутствует
+        if (isElementPresent(By.xpath("//div[@id='content']/img"))) {
+            String text1 = text.substring(text.indexOf("\n") + 1);
+            String text2 = text1.substring(text1.indexOf("\n") + 1);
+            text = text.substring(0, text.indexOf(text2) - 1) + text2;
+        }
+        return text;
     }
 
     private Contacts contactCache = null;
