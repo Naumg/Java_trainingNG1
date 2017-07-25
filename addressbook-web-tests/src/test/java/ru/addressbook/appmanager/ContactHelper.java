@@ -33,6 +33,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("home"), contactData.getHomePhone());
         type(By.name("mobile"), contactData.getMobilePhone());
         type(By.name("work"), contactData.getWorkPhone());
+        attach(By.name("photo"), contactData.getPhoto());
         if (ContactData.getGroup() != null) {
             if (creation) {
                 new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(ContactData.getGroup());
@@ -42,7 +43,7 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void selectContactById(int id) {
+    private void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
@@ -138,8 +139,11 @@ public class ContactHelper extends HelperBase {
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
                 .withAddress(address)
-                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
-                .withEmail(email).withEmail2(email2).withEmail3(email3);
+                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withFax(fax)
+                .withEmail(email).withEmail2(email2).withEmail3(email3).withHomePage(homepage)
+                .withBday(bday).withBmonth(bmonth).withByear(byear)
+                .withAday(aday).withAmonth(amonth).withAyear(ayear)
+                .withAddress2(address2).withPhone2(phone2).withNotes(notes);
     }
 
     public String infoFromDetailsFormAsString(ContactData contact) {
@@ -186,4 +190,3 @@ public class ContactHelper extends HelperBase {
     }
 
 }
-

@@ -1,48 +1,77 @@
 package ru.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+import java.io.File;
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Comparator;
+//import java.util.Comparator;
 import java.util.GregorianCalendar;
+import java.util.stream.Collectors;
 
-public class ContactData implements Comparable<ContactData> {
+@XStreamAlias("contact")
+public class ContactData /*implements Comparable<ContactData>*/ {
 
+    @XStreamOmitField
     private int id;
+    @XStreamOmitField
     private static String group;
+    @Expose
     private String firstname;
+    @XStreamOmitField
     private String middlename;
+    @Expose
     private String lastname;
-
+    @XStreamOmitField
     private String nickname;
+    @XStreamOmitField
     private String title;
+    @XStreamOmitField
     private String company;
-
+    @XStreamOmitField
     private String address;
-
+    @XStreamOmitField
     private String homePhone;
+    @XStreamOmitField
     private String mobilePhone;
+    @XStreamOmitField
     private String workPhone;
+    @XStreamOmitField
     private String allPhones;
-
+    @XStreamOmitField
+    private File photo;
+    @XStreamOmitField
     private String fax;
-
+    @Expose
     private String email;
+    @XStreamOmitField
     private String email2;
+    @XStreamOmitField
     private String email3;
+    @XStreamOmitField
     private String allEmails;
-
+    @XStreamOmitField
     private String homePage;
-
+    @XStreamOmitField
     private String bday;
+    @XStreamOmitField
     private String bmonth;
+    @XStreamOmitField
     private String byear;
 
+    @XStreamOmitField
     private String aday;
+    @XStreamOmitField
     private String amonth;
+    @XStreamOmitField
     private String ayear;
-
+    @XStreamOmitField
     private String address2;
+    @XStreamOmitField
     private String phone2;
-
+    @XStreamOmitField
     private String notes;
 
 
@@ -120,48 +149,45 @@ public class ContactData implements Comparable<ContactData> {
 
     public String asString() {
 
-        String allNames = firstname+middlename+lastname;  //!!NB
-//        String allNames = Arrays.asList(firstname, middlename, lastname).stream().filter((s) -> !s.equals(""))
-//                .collect(Collectors.joining(" "));
-
-        String detailInfoAsString = ""; //NB
-//        String detailInfoAsString = Arrays.asList(allNames,
-//                nickname,
-//                // Вопрос с пустой строкой для фото решается в методе для DetailsForm, поскольку при редактировании
-//                // отсутствует информация о загруженном файле
-//                title,
-//                company,
-//                formatMemo(address),
-//                // Пустая строка
-//                checkSkipLine(homePhone, mobilePhone, workPhone, fax),
-//                formatPhone("H", homePhone),
-//                formatPhone("M", mobilePhone),
-//                formatPhone("W", workPhone),
-//                formatPhone("F", fax),
-//                // Пустая строка
-//                checkSkipLine(email, email2, email3, homePage),
-//                formatEmail(email),
-//                formatEmail(email2),
-//                formatEmail(email3),
-//                formatHomePage(homePage),
-//                // Пустая строка
-//                checkSkipLine(formatDate("Birthday", bday, bmonth, byear), formatDate("Anniversary", aday, amonth, ayear), "", ""),
-//                formatDate("Birthday", bday, bmonth, byear),
-//                formatDate("Anniversary", aday, amonth, ayear),
-//                // Пустая строка
-//                checkSkipLine(address2, "", "", ""),
-//                formatMemo(address2),
-//                // Пустая строка
-//                checkSkipLine(phone2, "", "", ""),
-//                formatPhone("P", phone2),
-//                // Пустая строка
-//                checkSkipLine(notes, "", "", ""),
-//                formatMemo(notes)
-//        ).stream().filter((s) -> !s.equals("")).collect(Collectors.joining("\n")
-//        ).replace("$skipLine$", "");
+//        String allNames = firstname+middlename+lastname;  //!!NB
+        String allNames = Arrays.asList(firstname, middlename, lastname).stream().filter((s) -> !s.equals(""))
+                .collect(Collectors.joining(" "));
+        String detailInfoAsString = Arrays.asList(allNames,
+                nickname,
+                // Вопрос с пустой строкой для фото решается в методе для DetailsForm, поскольку при редактировании
+                // отсутствует информация о загруженном файле
+                title,
+                company,
+                formatMemo(address),
+                // Пустая строка
+                checkSkipLine(homePhone, mobilePhone, workPhone, fax),
+                formatPhone("H", homePhone),
+                formatPhone("M", mobilePhone),
+                formatPhone("W", workPhone),
+                formatPhone("F", fax),
+                // Пустая строка
+                checkSkipLine(email, email2, email3, homePage),
+                formatEmail(email),
+                formatEmail(email2),
+                formatEmail(email3),
+                formatHomePage(homePage),
+                // Пустая строка
+                checkSkipLine(formatDate("Birthday", bday, bmonth, byear), formatDate("Anniversary", aday, amonth, ayear), "", ""),
+                formatDate("Birthday", bday, bmonth, byear),
+                formatDate("Anniversary", aday, amonth, ayear),
+                // Пустая строка
+                checkSkipLine(address2, "", "", ""),
+                formatMemo(address2),
+                // Пустая строка
+                checkSkipLine(phone2, "", "", ""),
+                formatPhone("P", phone2),
+                // Пустая строка
+                checkSkipLine(notes, "", "", ""),
+                formatMemo(notes)
+        ).stream().filter((s) -> !s.equals("")).collect(Collectors.joining("\n")
+        ).replace("$skipLine$", "");
 
         return detailInfoAsString;
-
     }
 
     public String getAllPhones() {
@@ -281,6 +307,14 @@ public class ContactData implements Comparable<ContactData> {
         return this;
     }
 
+    public File getPhoto() {
+        return photo;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
 
     public String getTitle() {
         return title;
@@ -606,20 +640,18 @@ public class ContactData implements Comparable<ContactData> {
 //        return result;
 //    }
 //
-    @Override
-    public int compareTo(ContactData otherContactData) {
+//    @Override
+//    public int compareTo(ContactData otherContactData) {
 //        System.out.println("this.getId()= " + this.getId() + " otherShortContactData.getId()= " + otherShortContactData.getId());
-        return -otherContactData.getId() + this.getId();
+//        return -otherContactData.getId() + this.getId();
 //        return -(otherGroupData.getName().compareTo(this.getName()));
 
-    }
-
-    /*
-    * Comparator to sort employees list or array in order of name
-    */
-    public static Comparator<ContactData> nameComparator = new Comparator<ContactData>() {
-        public int compare(ContactData g1, ContactData g2) {
-            return g1.getId() - g2.getId();
-        }
-    };
+//    /*
+//    * Comparator to sort employees list or array in order of name
+//    */
+//    public static Comparator<ContactData> nameComparator = new Comparator<ContactData>() {
+//        public int compare(ContactData g1, ContactData g2) {
+//            return g1.getId() - g2.getId();
+//        }
+//};
 }
