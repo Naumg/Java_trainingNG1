@@ -8,20 +8,13 @@ import org.testng.annotations.Test;
 import ru.addressbook.model.GroupData;
 import ru.addressbook.model.Groups;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-
-//import java.io.File;
-//import java.io.FileReader;
-//import java.io.IOException;
 
 /**
  * Created by Naum.Ginzburg on 12.05.2017.
@@ -45,7 +38,8 @@ public class GroupCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validGroupsFromJson() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")));
+      BufferedReader reader = new BufferedReader(new FileReader(new File("addressbook-web-tests/src/test/resources/groups.json")));
+      //BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")));
     String json = "";
     String line = reader.readLine();
     while (line != null) {
@@ -68,7 +62,7 @@ public class GroupCreationTests extends TestBase {
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 
-  @Test
+  @Test (enabled = false)
   public void testBadGroupCreation() {
     app.goTo().groupPage();
     Groups before = app.group().all();
