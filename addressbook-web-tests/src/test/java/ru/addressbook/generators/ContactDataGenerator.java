@@ -1,4 +1,4 @@
-package ru.stesting.jtraining.addressbook.generators;
+package ru.addressbook.generators;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
@@ -6,7 +6,7 @@ import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
-import ru.stesting.jtraining.addressbook.model.ContactData;
+import ru.addressbook.model.ContactData;
 
 import java.io.File;
 import java.io.FileWriter;
