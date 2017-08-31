@@ -47,7 +47,10 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
-    public void deleteContact() {
+   public void initContactModificationById(int id) {
+    wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
+
+   public void deleteContact() {
         click(By.cssSelector("input[value='Delete']"));
 //          В одну строку wd.switchTo().alert().accept(); не проходит
         Alert alert = wd.switchTo().alert();
@@ -137,7 +140,8 @@ public class ContactHelper extends HelperBase {
         String phone2 = wd.findElement(By.name("phone2")).getAttribute("value");
         String notes = wd.findElement(By.name("notes")).getAttribute("value");
         wd.navigate().back();
-        return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
+    return new ContactData().withId(contact.getId()).withFirstname(firstname).withMiddlename(middlename).withLastname(lastname)
+            .withNickname(nickname).withTitle(title).withCompany(company)
                 .withAddress(address)
                 .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withFax(fax)
                 .withEmail(email).withEmail2(email2).withEmail3(email3).withHomePage(homepage)

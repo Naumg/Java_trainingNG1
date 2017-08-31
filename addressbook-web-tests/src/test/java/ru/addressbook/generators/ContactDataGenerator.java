@@ -18,7 +18,7 @@ import java.util.Random;
 
 
 /**
- * Created by DBorisov on 05.06.2016.
+ * Created by NGinzburg on 31.08.2017.
  */
 public class ContactDataGenerator {
 

@@ -5,7 +5,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @XStreamAlias("group")
-public class GroupData {
+public class GroupData implements Comparable<GroupData>{
     @XStreamOmitField
     private int id = Integer.MAX_VALUE;
     @Expose
@@ -72,6 +72,12 @@ public class GroupData {
 
     }
 
+    @Override
+    public int compareTo(GroupData otherGroupData) {
+        return -otherGroupData.getId() + this.getId();
+    }
+
+//
 //    @Override
 //    public int hashCode() {
 //        int result = id;

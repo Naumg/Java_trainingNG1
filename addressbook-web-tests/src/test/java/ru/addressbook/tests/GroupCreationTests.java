@@ -23,7 +23,7 @@ public class GroupCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validGroupsFromXml() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
+    BufferedReader reader = new BufferedReader(new FileReader(new File("addressbook-web-tests/src/test/resources/groups.xml")));
     String xml = "";
     String line = reader.readLine();
     while (line != null) {
@@ -62,7 +62,7 @@ public class GroupCreationTests extends TestBase {
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 
-  @Test (enabled = false)
+  @Test
   public void testBadGroupCreation() {
     app.goTo().groupPage();
     Groups before = app.group().all();

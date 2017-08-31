@@ -2,8 +2,8 @@ package ru.addressbook.model;
 
 import com.google.common.collect.ForwardingSet;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by Naum.Ginzburg on 25.05.2017.
@@ -13,11 +13,13 @@ public class Groups extends ForwardingSet<GroupData> /*implements Comparable<Gro
     private Set<GroupData> delegate;
 
     public Groups(Groups groups) {
-        this.delegate = new HashSet<GroupData>(groups.delegate());
+        this.delegate = new TreeSet(groups.delegate());
+//        this.delegate = new HashSet<GroupData>(groups.delegate());
     }
 
     public Groups() {
-        this.delegate = new HashSet<GroupData>();
+        this.delegate = new TreeSet();
+//        this.delegate = new HashSet<GroupData>();
     }
 
     @Override

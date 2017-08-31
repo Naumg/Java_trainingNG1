@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by DBorisov on 04.06.2016.
+ * Created by NGinzburg on 04.07.2017.
  */
 public class GroupDataGenerator {
 
