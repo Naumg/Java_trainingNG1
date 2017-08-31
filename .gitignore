@@ -7,8 +7,14 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-.idea/workspace.xml
+.idea/**/workspace.xml
 # /Sandbox/
 #/Sandbox/src/test/java/ru/sandbox/SquareTests.java
 
 *.log
+.idea/inspectionProfiles/
+.idea/libraries/Maven__com_thoughtworks_xstream_xstream_1_4_10.xml
+Sandbox/src/main/resources/
+addressbook-web-tests/src/main/
+addressbook-web-tests/src/test/java/ru/addressbook/tests/1ContactCreationTests.jjj
+addressbook-web-tests/src/test/java/ru/addressbook/tests/TestPiraty.java
