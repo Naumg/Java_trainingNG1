@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Created by Naum.Ginzburg on 12.05.2017.
+ * Created by Naum.Ginzburg on 05.09.2017.
  */
 public class GroupCreationTests extends TestBase {
 
